@@ -1,0 +1,1 @@
+SELECT 'CREATE DATABASE taskrr' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'taskrr')\gexec
