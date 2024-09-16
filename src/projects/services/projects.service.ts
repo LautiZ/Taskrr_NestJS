@@ -5,6 +5,7 @@ import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { ProjectsEntity } from '../entities/projects.entity';
 import { ProjectUpdateDto } from '../dto/project-update.dto';
 import { ErrorManager } from 'src/utils/error.manager';
+import { ProjectDto } from '../dto/project.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -13,7 +14,7 @@ export class ProjectsService {
     private readonly projectsRepository: Repository<ProjectsEntity>,
   ) {}
 
-  public async createProject(body: ProjectsEntity): Promise<ProjectsEntity> {
+  public async createProject(body: ProjectDto): Promise<any> {
     try {
       return await this.projectsRepository.save(body);
     } catch (error) {
