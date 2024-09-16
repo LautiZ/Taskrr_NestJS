@@ -10,6 +10,7 @@ import {
 import { UsersService } from '../services/users.service';
 import { UserDto } from '../dto/user.dto';
 import { UserUpdateDto } from '../dto/user-update.dto';
+import { UserToProjectDto } from '../dto/user-to-project.dto';
 
 @Controller('users')
 export class UsersController {
@@ -41,5 +42,10 @@ export class UsersController {
   @Delete('delete/:id')
   public async deleteUser(@Param('id') id: string) {
     return await this.usersService.deleteUser(id);
+  }
+
+  @Post('add-to-project')
+  public async addToProject(@Body() body: UserToProjectDto) {
+    return await this.usersService.relationToProject(body);
   }
 }
