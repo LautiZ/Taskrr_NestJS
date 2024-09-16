@@ -21,17 +21,17 @@ export class ProjectsController {
   }
 
   @Get('all')
-  public async findAllUsers() {
+  public async findAllProjects() {
     return await this.projectsService.findProjects();
   }
 
   @Get(':id')
-  public async findUserById(@Param('id') id: string) {
+  public async findProjectById(@Param('id') id: string) {
     return await this.projectsService.findProjectById(id);
   }
 
   @Patch('edit/:id')
-  public async updateUser(
+  public async updateProject(
     @Param('id') id: string,
     @Body() body: ProjectUpdateDto,
   ) {
@@ -39,7 +39,7 @@ export class ProjectsController {
   }
 
   @Delete('delete/:id')
-  public async deleteUser(@Param('id') id: string) {
+  public async deleteProject(@Param('id') id: string) {
     return await this.projectsService.deleteProject(id);
   }
 }
