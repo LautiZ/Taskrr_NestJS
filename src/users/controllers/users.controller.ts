@@ -14,17 +14,21 @@ import { UserUpdateDto } from '../dto/user-update.dto';
 import { UserToProjectDto } from '../dto/user-to-project.dto';
 import { PublicAccess } from '../../auth/decorators/public.decorator';
 import { AuthGuard } from '../../auth/guards/auth.guard';
+import { RolesGuard } from '../../auth/guards/roles.guard';
+import { AdminAccess } from 'src/auth/decorators/admin.decorator';
 
 @Controller('users')
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard, RolesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @PublicAccess()
   @Post('register')
   public async registerUser(@Body() body: UserDto) {
     return await this.usersService.createUser(body);
   }
 
+  @AdminAccess()
   @Get('all')
   public async findAllUsers() {
     return await this.usersService.findUsers();
