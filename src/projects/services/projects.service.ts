@@ -28,6 +28,12 @@ export class ProjectsService {
   ): Promise<UsersProjectsEntity> {
     try {
       const user = await this.userService.findUserById(userId);
+      if (!user) {
+        throw new ErrorManager({
+          type: 'NOT_FOUND',
+          message: 'User not found',
+        });
+      }
       const project = await this.projectsRepository.save(body);
       return await this.userProjectsRepository.save({
         accessLevel: ACCESS_LEVEL.OWNER,
